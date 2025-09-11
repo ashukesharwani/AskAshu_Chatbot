@@ -11,10 +11,10 @@ import os
 # 1. Load environment variables
 load_dotenv()
 
-# 2. Access your Hugging Face token
+# This is for running in locally
 # hf_token = os.getenv("HF_TOKEN")
 
-# Get token from .env (local) or secrets.toml (cloud)
+# This is for Streamlit app
 HF_TOKEN = os.getenv("HF_TOKEN") or st.secrets.get("HF_TOKEN")
 
 # Set up the page title and initial instructions
@@ -26,7 +26,7 @@ st.info("Ask me anything! Type 'exit' to end the chat.")
 llm = HuggingFaceEndpoint(
     repo_id="google/gemma-2-2b-it",
     task="text-generation",
-    huggingfacehub_api_token=hf_token
+    huggingfacehub_api_token=HF_TOKEN
 )
 model = ChatHuggingFace(llm=llm)
 
